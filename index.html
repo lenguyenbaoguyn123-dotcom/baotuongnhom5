@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Website Tri Ân Thầy Cô 20/11</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+      background-color: #F5F5DC;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      background: white;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: 0.3s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 6px 25px rgba(0,0,0,0.12);
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #2c3e50;
+      user-select: none;
+    }
+    .logo span { color: #e74c3c; }
+
+    .nav-links { display: flex; list-style: none; gap: 6px; }
+    .nav-links li a {
+      text-decoration: none;
+      color: #333;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      transition: 0.3s;
+      font-weight: 500;
+    }
+    .nav-links li a:hover {
+      color: #e74c3c;
+      background: rgba(231, 76, 60, 0.08);
+    }
+
+    /* ===== Hero ===== */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(135deg, #ffb6c1, #ffd1dc);
+      height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.25), transparent 45%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.18), transparent 50%);
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      animation: floatIn 1s ease forwards;
+    }
+    .hero h1 {
+      font-size: 3.2rem;
+      margin-bottom: 10px;
+      font-family: 'Dancing Script', cursive;
+      font-weight: 800;
+      text-shadow: 0 6px 25px rgba(0,0,0,0.25);
+    }
+    @keyframes floatIn {
+      from { opacity: 0; transform: translateY(25px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== Sections ===== */
+    .teacher-section { padding: 50px 5%; }
+
+    /* ===== Gallery ===== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .gallery-item {
+      text-align: center;
+      background: white;
+      padding: 10px;
+      border-radius: 14px;
+      transition: 0.35s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+    .gallery-item img {
+      width: 100%;
+      border-radius: 10px;
+      transition: 0.35s ease;
+      display: block;
+    }
+    .gallery-item h1 {
+      margin-top: 12px;
+      font-size: clamp(1.4rem, 2vw, 2.1rem);
+      font-family: 'Dancing Script', cursive;
+      color: #b08d57;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    /* ===== Letter + Video ===== */
+    .letter-video-section {
+      padding: 60px 5%;
+      background: #fdf5e6;
+    }
+    .letter-video-container {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .letter-container-half,
+    .video-container-half {
+      flex: 1;
+      background: white;
+      padding: 30px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.1);
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .letter-container-half { border-top: 5px solid #d4a017; }
+    .letter-header { text-align: center; margin-bottom: 30px; }
+    .letter-header h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 2.8rem;
+      color: #b08d57;
+      line-height: 1.2;
+    }
+    .letter-header p { margin-top: 6px; opacity: 0.85; }
+    .letter-body p { margin-bottom: 15px; text-align: justify; }
+    .letter-footer { text-align: right; margin-top: 40px; font-size: 1rem; }
+
+    .video-info { text-align: center; margin-bottom: 15px; }
+    .video-info h1 {
+      font-family: 'Dancing Script', cursive;
+      color: #b08d57;
+      font-size: 3rem;
+    }
+    .video-wrapper { width: 100%; flex-grow: 1; display: flex; align-items: center; }
+    .video-wrapper video {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    /* ===== Footer ===== */
+    footer {
+      background: #2c3e50;
+      color: white;
+      text-align: center;
+      padding: 30px;
+    }
+
+    /* ===== Reveal ===== */
+    .reveal { opacity: 0; transform: translateY(25px); transition: 0.8s ease; }
+    .reveal.show { opacity: 1; transform: translateY(0); }
+
+    /* ===== Buttons ===== */
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 45px;
+      height: 45px;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      background: #e74c3c;
+      color: white;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      opacity: 0;
+      transform: translateY(15px);
+      transition: 0.35s ease;
+      z-index: 9999;
+    }
+    .back-to-top.show { opacity: 1; transform: translateY(0); }
+
+    /* ===== Falling layer ===== */
+    .fall-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      overflow: hidden;
+    }
+    .fall-item {
+      position: absolute;
+      top: -40px;
+      font-size: 18px;
+      opacity: 0.9;
+      animation-name: fall;
+      animation-timing-function: linear;
+      user-select: none;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.08;
+      }
+    }
+
+    /* Tuyết trắng */
+    .fall-item.snow {
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+      opacity: 0.95;
+    }
+
+    /* ===== Lightbox ===== */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 99999;
+      padding: 20px;
+    }
+    .lightbox.show { display: flex; }
+
+    .lightbox-content {
+      max-width: 980px;
+      width: 100%;
+      position: relative;
+      animation: zoomIn 0.25s ease;
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.92); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    .lightbox-content img {
+      width: 100%;
+      border-radius: 14px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      display: block;
+      user-select: none;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: -14px;
+      right: -14px;
+      width: 42px;
+      height: 42px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      background: #e74c3c;
+      color: white;
+      font-size: 20px;
+      box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+    }
+
+    .lb-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 46px;
+      height: 46px;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      background: rgba(255,255,255,0.16);
+      color: white;
+      font-size: 22px;
+      display: grid;
+      place-items: center;
+      transition: 0.2s ease;
+      backdrop-filter: blur(6px);
+    }
+    .lb-nav:hover { background: rgba(255,255,255,0.28); }
+    .lb-prev { left: 12px; }
+    .lb-next { right: 12px; }
+
+    .lb-caption {
+      margin-top: 12px;
+      text-align: center;
+      color: rgba(255,255,255,0.9);
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.8rem;
+      text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      user-select: none;
+    }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 992px) {
+      .letter-video-container { flex-direction: column; align-items: center; }
+      .letter-container-half, .video-container-half { width: 100%; max-width: 800px; }
+      .hero h1 { font-size: 2.2rem; }
+      .nav-links li a { padding: 0.4rem 0.7rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Falling layer -->
+  <div class="fall-layer" id="fallLayer"></div>
+
+  <nav class="navbar">
+    <div class="logo">Tri Ân Thầy Cô <span>20/11</span></div>
+    <ul class="nav-links">
+      <li><a href="#gioithieu">Giới thiệu</a></li>
+      <li><a href="#thayco">Thầy cô</a></li>
+      <li><a href="#kyniem">Kỷ niệm</a></li>
+      <li><a href="#thutrian">Thư tri ân</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero reveal" id="gioithieu">
+    <div class="hero-content">
+      <h1>Những Người Thầy, Người Cô Đáng Kính</h1>
+      <h1>Dưới mái trường THPT Thừa Lưu thân yêu</h1>
+    </div>
+  </header>
+
+  <section class="teacher-section reveal" id="thayco">
+    <div class="gallery reveal" id="kyniem">
+
+      <div class="gallery-item"
+           data-img="https://sf-static.upanhlaylink.com/img/image_202602113fa816384898bf5062842f89010da534.jpg"
+           data-caption="Người chấp cánh ước mơ">
+        <img src="https://sf-static.upanhlaylink.com/img/image_202602113fa816384898bf5062842f89010da534.jpg" alt="Người chấp cánh ước mơ">
+        <h1>Người chấp cánh ước mơ</h1>
+      </div>
+
+      <div class="gallery-item"
+           data-img="https://sf-static.upanhlaylink.com/img/image_20260211447f626bb8085ce907cc9f96aa862231.jpg"
+           data-caption="Người gieo chữ">
+        <img src="https://sf-static.upanhlaylink.com/img/image_20260211447f626bb8085ce907cc9f96aa862231.jpg" alt="Kỷ niệm 1">
+        <h1>Người gieo chữ</h1>
+      </div>
+
+      <div class="gallery-item"
+           data-img="https://sf-static.upanhlaylink.com/img/image_20260211135b7e930389cb00f40d03c1f944dcb1.jpg"
+           data-caption="Những người lái đò thầm lặng">
+        <img src="https://sf-static.upanhlaylink.com/img/image_20260211135b7e930389cb00f40d03c1f944dcb1.jpg" alt="Những người lái đò thầm lặng">
+        <h1>Những người lái đò thầm lặng</h1>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="letter-video-section reveal" id="thutrian">
+    <div class="letter-video-container">
+
+      <div class="letter-container-half reveal">
+        <div class="letter-header">
+          <h2>Thư Gửi Thầy Cô Nhân Ngày 20/11</h2>
+          <p>Huế, ngày 20 tháng 11 năm 2026</p>
+        </div>
+        <div class="letter-body">
+          <p>Chúng em biết ơn thầy cô vô cùng vì những bài học quý giá, không chỉ là kiến thức trong sách vở mà còn là những bài học về cách sống, cách làm người...</p>
+          <p>Dù mai này có đi bất cứ nơi đâu, chúng em vẫn mãi nhớ về mái trường thân yêu.</p>
+        </div>
+        <div class="letter-footer">
+          <p>Với lòng biết ơn sâu sắc,</p>
+          <p><strong>12C2 Nhóm 5</strong></p>
+        </div>
+      </div>
+
+      <div class="video-container-half reveal">
+        <div class="video-info">
+          <h1>Video Kỷ Niệm</h1>
+        </div>
+        <div class="video-wrapper">
+          <video id="memoryVideo" controls>
+            <source src="https://image2url.com/r2/default/videos/1770817405119-1f96d603-1fe4-48c3-88b4-85c521ea25f6.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="reveal">
+    <p>Website Tri Ân 20/11 - Lớp 12C2 Nhóm 5 - Trường THPT Thừa Lưu</p>
+    <p>© Năm học 2025 - 2026</p>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose">✕</button>
+
+      <button class="lb-nav lb-prev" id="lbPrev" title="Ảnh trước">‹</button>
+      <button class="lb-nav lb-next" id="lbNext" title="Ảnh sau">›</button>
+
+      <img id="lightboxImg" src="" alt="Ảnh phóng to">
+      <div class="lb-caption" id="lbCaption"></div>
+    </div>
+  </div>
+
+  <!-- Buttons -->
+  <button class="back-to-top" id="btnTop">↑</button>
+
+  <script>
+    /* ===== Navbar blur ===== */
+    const navbar = document.querySelector(".navbar");
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 20) navbar.classList.add("scrolled");
+      else navbar.classList.remove("scrolled");
+    });
+
+    /* ===== Reveal ===== */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add("show");
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+
+    /* ===== Back to top ===== */
+    const btnTop = document.getElementById("btnTop");
+    btnTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 300) btnTop.classList.add("show");
+      else btnTop.classList.remove("show");
+    });
+
+    /* ===== Lightbox with Next/Prev ===== */
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxClose = document.getElementById("lightboxClose");
+    const lbPrev = document.getElementById("lbPrev");
+    const lbNext = document.getElementById("lbNext");
+    const lbCaption = document.getElementById("lbCaption");
+
+    const items = Array.from(document.querySelectorAll(".gallery-item"));
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      const imgSrc = items[currentIndex].getAttribute("data-img");
+      const caption = items[currentIndex].getAttribute("data-caption") || "";
+      lightboxImg.src = imgSrc;
+      lbCaption.textContent = caption;
+      lightbox.classList.add("show");
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove("show");
+      lightboxImg.src = "";
+      lbCaption.textContent = "";
+    }
+
+    function nextImg() {
+      currentIndex = (currentIndex + 1) % items.length;
+      openLightbox(currentIndex);
+    }
+
+    function prevImg() {
+      currentIndex = (currentIndex - 1 + items.length) % items.length;
+      openLightbox(currentIndex);
+    }
+
+    items.forEach((item, idx) => {
+      item.addEventListener("click", () => openLightbox(idx));
+    });
+
+    lightboxClose.addEventListener("click", closeLightbox);
+    lbNext.addEventListener("click", (e) => { e.stopPropagation(); nextImg(); });
+    lbPrev.addEventListener("click", (e) => { e.stopPropagation(); prevImg(); });
+
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("show")) return;
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") nextImg();
+      if (e.key === "ArrowLeft") prevImg();
+    });
+
+    /* ===== Falling theme 20/11 + Snow ===== */
+    const fallLayer = document.getElementById("fallLayer");
+
+    // Icon chủ đề 20/11
+    const icons = ["🌸", "💐", "💖", "✨", "🖊️", "📚"];
+
+    function createFallItem() {
+      if (!fallLayer) return;
+
+      const span = document.createElement("span");
+      span.className = "fall-item";
+      span.textContent = icons[Math.floor(Math.random() * icons.length)];
+
+      const left = Math.random() * 100;
+      const size = 14 + Math.random() * 18;
+      const duration = 7 + Math.random() * 6;
+
+      span.style.left = left + "vw";
+      span.style.fontSize = size + "px";
+      span.style.animationDuration = duration + "s";
+
+      fallLayer.appendChild(span);
+      setTimeout(() => span.remove(), duration * 1000);
+    }
+
+    // Tuyết trắng ❄️
+    function createSnow() {
+      if (!fallLayer) return;
+
+      const snow = document.createElement("span");
+      snow.className = "fall-item snow";
+      snow.textContent = "❄";
+
+      const left = Math.random() * 100;
+      const size = 10 + Math.random() * 14;
+      const duration = 6 + Math.random() * 6;
+
+      snow.style.left = left + "vw";
+      snow.style.fontSize = size + "px";
+      snow.style.animationDuration = duration + "s";
+
+      fallLayer.appendChild(snow);
+      setTimeout(() => snow.remove(), duration * 1000);
+    }
+
+    // Mật độ rơi: icon 20/11 + tuyết
+    setInterval(createFallItem, 320);
+    setInterval(createSnow, 220);
+  </script>
+
+</body>
+</html>
